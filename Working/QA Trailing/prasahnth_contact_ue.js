@@ -23,7 +23,7 @@
                  
             })
             NewRecord.setValue({
-            fieldId:"custrecord_mb_phone",
+            fieldId:"custrecord_prashanth_contact1_details_ue",
                 value: "4545454545"
             })
          }
@@ -62,13 +62,13 @@
         */
      function aftersubmit(scriptContext) {
          
-        var NewRecord = scriptContext.newRecord;
-        // // var h_id = NewRecord.getValue({
-        // //     fieldId: "custrecord_companyname"
-        // });
+       var NewRecord = scriptContext.newRecord;
+        var h_id = NewRecord.getValue({
+            fieldId: "custrecord_prasahnth_contact_emial_ue"
+        });
         email.send({
             author: "1719",
-            recipients: "prasahnth@kpi.co",
+            recipients:h_id,
             subject: "This is 2.0 UE",
             body: "Your Data Submitted Successfully",
         });
