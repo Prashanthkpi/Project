@@ -54,7 +54,7 @@ define(['N/log', 'N/search', 'N/format', 'N/runtime'],
 
            var carrier_value=context.currentRecord.getValue({
                 fieldId: 'name'
-
+                var lll;
             });
            // console.log(name1)
              
