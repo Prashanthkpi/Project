@@ -52,19 +52,19 @@ define(['N/log', 'N/search', 'N/format', 'N/runtime'],
             currentRecord= context.currentRecord;
             var currentfieldId= context.fieldId;
 
-           var name1= carrier_value=context.currentRecord.getValue({
+           var carrier_value=context.currentRecord.getValue({
                 fieldId: 'name'
 
             });
-            console.log(name1)
+           // console.log(name1)
              
             if(currentfieldId== "name")
             {
                 currentRecord.setValue({
                     fieldId: 'custrecord_prashanth_contact_name_form',
-                    value:name1
+                    value:carrier_value
                 });
-                alert(name1)
+               // alert(name1)
             }
            
             
@@ -173,12 +173,13 @@ define(['N/log', 'N/search', 'N/format', 'N/runtime'],
                 var jobTitle = currentRecord.getValue({
                     fieldId: 'custrecord_prashanth_adhar_number_form'
                 });
-                var jobTitleLength = jobTitle.length;
+                var jobTitleLength = jobTitle.toString().length
                 
-                console.log(+jobTitleLength)
+               // console.log(+jobTitleLength)
                 if (jobTitleLength < 12){
                     return false;
                 }
+                console.log(+jobTitleLength)   
             }
             return true;
         }
