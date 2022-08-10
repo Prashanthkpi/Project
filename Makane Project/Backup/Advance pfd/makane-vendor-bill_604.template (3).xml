@@ -1,0 +1,722 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+
+        <table class="header" style="width: 100%;height:90px;">
+            <tr >
+                <td style="width:100%;">
+                <#if subsidiary.logo@url?has_content>
+                     <img src="${subsidiary.logo@url}" style="align:right;height:100px;width:150px;top:-10px;padding-top:-10px;padding-bottom:25px;"/> <!--style="height:150px;position:absolute;top:-10px;padding-top:-10px;padding-bottom:20px;margin-left:1000px;" /> -->
+               	
+                <#else>
+                    <img src="${companyInformation.logoUrl}" style="align:right;height:100px;width:150px;top:-10px;padding-top:-10px;padding-bottom:25px;"/><!--  style="height:150px;position:absolute;top:-10px;padding-top:-10px;padding-bottom:20px;margin-left:1000px; " /> -->
+                </#if>
+                
+                   
+                </td> 
+	        </tr>
+        </table>
+        </macro>
+        <macro id="nlfooter">
+            <table class="footer"><tr>
+	<td align="right"><pagenumber/> of <totalpages/></td>
+	</tr></table>
+        </macro>
+    </macrolist>
+    <style type="text/css">span, table {
+                        <#if .locale=="zh_CN">font-family: stsong, sans-serif;
+                            <#elseif .locale=="zh_TW">font-family: msung, sans-serif;
+                                <#elseif .locale=="ja_JP">font-family: heiseimin, sans-serif;
+                                    <#elseif .locale=="ko_KR">font-family: hygothic, sans-serif;
+                                        <#elseif .locale=="ru_RU">font-family: verdana;
+                                            <#else>font-family: sans-serif;
+                                            </#if>font-size: 9pt;
+		table-layout: fixed;
+		}
+		th {
+		font-weight: bold;
+		font-size: 8.5pt;
+		padding-top: 2px;
+		vertical-align: middle;
+		/*padding: 3px 6px 10px;*/
+		/*background-color: #e3e3e3;
+		color: #333333;*/
+		}
+		b {
+		font-weight: bold;
+		color: #333333;
+		}
+		table.header td {
+		padding: 0;
+		font-size: 10pt;
+		}
+		table.footer td {
+		padding: 0;
+		font-size: 8pt;
+		}
+		#itemtable th p{
+		vertical-align: text-top !important;
+		text-align: center !important;
+		}
+		#itemtable{
+		font-size: 8.5pt !important;
+		border: 0.5px solid #000000
+		}
+		table.total {
+		page-break-inside: avoid;
+		}
+		tr.totalrow {
+		background-color: #e3e3e3;
+		line-height: 200%;
+		}
+		td.totalboxtop {
+		font-size: 12pt;
+		background-color: #e3e3e3;
+		}
+		span.title {
+		font-size: 28pt;
+		}
+		.smallTitle {
+		font-size: 9pt;
+		}
+		span.number {
+		font-size: 16pt;
+		text-align:center;
+		}
+		span.itemname {
+		font-weight: bold;
+		line-height: 150%;
+		}
+		hr {
+		width: 100%;
+		color: #d3d3d3;
+		background-color: #d3d3d3;
+		height: 1px;
+		}
+		table.smalltext tr td {
+		font-size: 8pt;
+		}
+		/*table.itemtable th{
+		border-bottom: 10px #ffc966;
+		border-color: yellow;
+		}*/
+		p.alignR {
+		text-align: right !important;
+		}
+		p.alignL {
+		text-align: left !important;
+		}
+		p.alignC {
+		text-align: center !important;
+		}
+		.td_right_line{
+		/*border-right: 0.5px solid #f4f4f4;*/
+		border-right :0.5px solid #000000;
+		}
+		.td_bottom_line{
+		border-bottom: 0.5px solid #000000;
+		}
+		.td_top_line{
+		/*border-top :0.5px solid #f4f4f4;*/
+		border-top :0.5px solid #000000;
+		}
+		.title{
+		font-weight: bold;
+		align:center!important;
+		font-size:16pt;
+		}
+		.footer-img{
+		/*width: 100%;
+		height: 20%;*/
+		top: 0px;
+		right: 0px;
+		left: 0px;
+		bottom: 0px;
+		}
+		.footer{
+		margin-left:-45px; margin-right:-60px; margin-bottom:-115px;
+		}
+		.td_left_line{
+		/*border-right: 0.5px solid #f4f4f4;*/
+		border-left :0.5px solid #000000;
+		}
+		.maintbl{
+		border:0.5px solid #000000;
+		}
+		.footertbl{
+		border:0.5px solid #000000;
+		border-top: 0px !important;
+		}
+		.footertbl2{
+		
+		/*border:0.5px solid #000000;*/
+		border-left: 0.5px solid #000000;
+		border-right: 0.5px solid #000000;
+		border-top: 0.25px !important;
+		}
+		.pad_left{
+		padding-left: 5px!important;
+		}
+		th,td{
+		padding:4px;
+		}
+		                                                                                                                                                                                                                            <!--  .td_top_line td{
+		padding-left: 5px!important;
+		} -->
+		td img {
+		max-width:100%;
+		
+		}
+    </style>
+</head>
+<body header="nlheader" header-height="10%" footer="nlfooter" footer-height="10pt" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+    
+
+
+
+	
+<table width="100%">';
+        <tr>
+            <td align="center" class="title">
+                <b><u>Vendor Bill</u></b>
+            </td>
+        </tr>
+    </table>
+    <table width="100%" border="0.5px solid #000000">
+                                        
+    <tr >
+        <td width="50%" border-right="0.5px solid #000000">
+            <table align="right" width="100%">
+                <tr>
+                    <td align="left" width="50%">
+                        <p align="left"><b>Bill To</b></p>
+                    </td>
+                    <td width="2%">
+                        <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                    </td>
+                                                            
+<#if record.entity.isperson?string =="Yes">
+                    <td align="left" width="48%">
+                        <p align="left"><b>${record.entity.firstname}&nbsp;${record.entity.lastname}</b></p>
+                    </td>
+<#else>
+                    <td align="left" width="48%">
+                        <p align="left"><b>${record.entity.companyname}</b></p>
+                    </td>
+</#if>
+                </tr>
+<#if record.entity.address?has_content>
+                <tr>
+                    <td align="left" width="50%">
+                        <p align="left"><b>Address</b></p>
+                    </td>
+                    <td width="2%">
+                        <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                    </td>
+                    <td align="left" width="48%">${record.entity.address}</td>
+                </tr>
+</#if>
+
+<#if record.entity.email?has_content>
+                <tr>
+                    <td align="left" width="50%">
+                        <p align="left"><b>Email</b></p>
+                    </td>
+                    <td width="2%">
+                        <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                    </td>
+                    <td align="left" width="48%">
+                        <p align="left" style="text-decoration:none;">${record.entity.email}</p>
+                    </td>
+                </tr>
+</#if>
+<#if record.entity.vatregnumber?has_content>
+                <tr>
+                    <td align="left" width="50%">
+                        <p align="left"><b>Supplier Tax Registration Number</b></p>
+                    </td>
+                    <td width="2%">
+                        <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                    </td>
+                    <td align="left" width="48%">
+                        <p align="left" style="text-decoration:none;">${record.entity.vatregnumber}</p>
+                    </td>
+                </tr>
+</#if>
+<#if record.entity.contact?has_content>
+                <tr>
+                    <td align="left" width="50%">
+                        <p align="left"><b>Attention</b></p>
+                    </td>
+                    <td width="2%">
+                        <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                    </td>
+                    <td align="left" width="48%">
+                        <p align="left" style="text-decoration:none;">${record.entity.contact}</p>
+                    </td>
+                </tr>
+</#if>  
+<#if record.entity.phone?has_content>
+                <tr>
+                    <td align="left" width="50%">
+                        <p align="left"><b>Tel No</b></p>
+                    </td>
+                    <td width="2%">
+                        <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                    </td>
+                    <td align="left" width="48%">${record.entity.phone}</td>
+                </tr>
+</#if>                                             
+            </table>
+            
+        </td>
+
+        <td width="50%">
+            <table width="100%">
+<#if record.tranid?has_content>
+                <tr>
+                    <td align="left" width="50%">
+                        <p align="left"><b>Bill#</b></p>
+                    </td>
+                    <td width="2%">
+                        <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                    </td>
+                    <td align="left" width="48%">${record.tranid}</td>
+                </tr>
+</#if>
+ <#if record.trandate?has_content>
+                <tr>
+                    <td align="left" width="50%">
+                        <p align="left"><b>Bill Date</b></p>
+                    </td>
+                    <td width="2%">
+                        <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                    </td>
+                    <td align="left" width="48%">${record.trandate?string("dd-MMM-YYYY")}</td>
+                </tr>
+</#if>
+<#if record.currencysymbol?has_content>
+                <tr>
+                    <td align="left" width="50%">
+                        <p align="left"><b>Currency</b></p>
+                    </td>
+                    <td width="2%">
+                        <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                    </td>
+                    <td align="left" width="48%">${record.currencysymbol}</td>
+                </tr>
+</#if>
+<#if record.exchangerate?has_content>
+                <tr>
+                    <td align="left" width="50%">
+                        <p align="left"><b>Exchange Rate</b></p>
+                    </td>
+                    <td width="2%">
+                        <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                    </td>
+                    <td align="left" width="48%">${record.exchangerate?string["#,##0.00"]}</td>
+                </tr>
+</#if>
+<#if subsidiary.federalidnumber?has_content>
+                <tr>
+                    <td align="left" width="50%">
+                        <p align="left"><b>Tax Registration Number</b></p>
+                    </td>
+                    <td width="2%">
+                        <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                    </td>
+                    <td align="left" width="48%">${subsidiary.federalidnumber}</td>
+                </tr>
+
+</#if>
+<#if record.duedate?has_content>
+                <tr>
+                    <td align="left" width="50%">
+                        <p align="left"><b>Due Date</b></p>
+                    </td>
+                    <td width="2%">
+                        <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                    </td>
+                    <td align="left" width="48%">${record.duedate}</td>
+                </tr>
+</#if>
+
+<#if record.terms?has_content>
+                <tr>
+                    <td align="left" width="50%">
+                        <p align="left"><b>Payment Terms</b></p>
+                    </td>
+                    <td width="2%">
+                        <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                    </td>
+                    <td align="left" width="48%">${record.terms}</td>
+                </tr>
+</#if>
+<#if record.billaddress?has_content>
+                <tr>
+                    <td align="left" width="50%">
+                        <p align="left"><b>Delivery Address</b></p>
+                    </td>
+                    <td width="2%">
+                        <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                    </td>
+                    <td align="left" width="48%">${subsidiary.mainaddress_text}</td>
+                </tr>
+</#if>
+<!-- <#if record.incoterm?has_content>
+<tr>
+    <td align="left" width="50%">
+        <p align="left"><b>Incoterm</b></p>
+    </td>
+    <td width="2%">
+        <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+    </td>
+    <td align="left" width="48%">${record.incoterm}</td>
+</tr>
+</#if> -->
+<#if record.memo?has_content>
+                <tr>
+                    <td align="left" width="50%">
+                        <p align="left"><b>Memo</b></p>
+                    </td>
+                    <td width="2%">
+                        <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                    </td>
+                    <td align="left" width="48%">
+                        <p class="alignL">${record.memo}</p>
+                    </td>
+                </tr>
+</#if>
+
+            </table>
+        </td>
+    </tr>
+</table>
+
+
+<#if record.item?has_content>
+<table class="itemtable" style="width: 100%;margin-top:10px;">
+    <tr>
+        <td align="left" class=""><b>Items</b></td>
+    </tr>
+</table>
+<#assign SrNo=0>
+    <table class="footertbl2" id="itemtable" style="width: 100%;margin-top:10px;" width="100%">                                                <!-- start items -->
+    <#list record.item as item>
+        <#if item_index==0><#assign grosstotalsum = 0>
+        <#assign amounttotalsum = 0><#assign taxamttotalsum = 0><#assign grossamttotalsum = 0>
+        <thead>
+            <tr style="padding-bottom: 0px;">
+                <th align="center" width="4%" class="td_right_line">
+                    <p align="left"><b>Sl#</b></p>
+                </th>
+                <th align="left" class="td_right_line" width="23%">
+                    <p class="alignL">Item Description</p>
+                </th>
+                <th align="center" class="td_right_line" width="5%">
+                    <p>Qty</p>
+                </th>
+                <th align="left" class="td_right_line" width="10%">
+                    <p>Unit</p>
+                </th>
+                <th align="right" class="td_right_line" width="12%">
+                    <p class="alignR">Unit Rate</p>
+                </th>
+                <th align="right" class="td_right_line" width="13%">
+                    <p class="alignR">Amount</p>
+                </th>
+                 <th align="right" class="td_right_line" width="12%">
+                    <p class="alignR">Tax code</p>
+                </th>
+                <th align="right" class="td_right_line" width="8%">
+                    <p class="alignR">Tax Rate</p>
+                </th>
+                <th align="right" class="td_right_line" width="12%">
+                    <p class="alignR">Tax Amount</p>
+                </th>
+                <th align="right" width="13%">
+                    <p class="alignR">Gross Amount</p>
+                </th>
+            </tr>
+        </thead>
+</#if>
+                                     
+        <tr>
+            <td align="center" class="td_top_line td_right_line">
+                <p align="center"><#assign SrNo=SrNo + 1/>${SrNo}</p></td>
+            <td align="left" class="td_top_line td_right_line">
+                <p class="alignL">${item.item}<br/>${item.description}</p>
+            </td>
+            <td align="center" class="td_top_line td_right_line">
+                <p class="alignC">${item.quantity}</p>
+            </td>
+            <td align="left" class="td_top_line td_right_line">
+                <p class="alignL">${item.units}</p>
+            </td>
+            <td align="right" class="td_top_line td_right_line">
+                <p class="alignR">${item.rate?string["##,#00.00"]}</p>
+            </td>
+            <td align="right" class="td_top_line td_right_line">
+                <p class="alignR">${item.amount?string('##,#00.00')}</p>
+            </td>
+             <td align="right" class="td_top_line td_right_line">
+                <p class="alignR">${item.taxcode}</p>
+            </td>
+            <td align="right" class="td_top_line td_right_line">
+                <p class="alignR">${item.taxrate1}</p>
+            </td>
+           
+            <td align="right" class="td_top_line td_right_line">
+            <#if item.tax1amt?has_content>
+                <p class="alignR">${item.tax1amt?string('##,#00.00')}</p>
+            </#if>
+            </td>
+            
+            <td align="right" class="td_top_line ">
+             <#if item.grossamt?has_content>
+                <p class="alignR">
+    ${item.grossamt?string('##,#00.00')}</p>
+            </#if>
+    <#assign amounttotalsum=amounttotalsum + item.amount/>
+    <#assign taxamttotalsum=taxamttotalsum + item.tax1amt/>
+    <#assign grossamttotalsum=grossamttotalsum + item.grossamt/>
+            </td>
+        </tr>
+</#list>
+    <tr>
+        <td align="right" colspan="5" class="td_right_line  td_top_line" style="font-weight: bold;">TOTAL</td>
+        <td align="right" class="td_top_line td_right_line ">
+            <#if amounttotalsum?has_content>
+            <p class="alignR"><b>${amounttotalsum?string('##,#00.00')}</b></p>
+            </#if>
+        </td>
+        <td align="right" class="td_top_line td_right_line ">
+        </td>
+         <td align="right" class="td_top_line td_right_line ">
+        </td>
+        <td align="right" class="td_top_line td_right_line ">
+            <p class="alignR">
+            <!-- <#if taxamttotalsum?has_content> -->
+            <b>${taxamttotalsum}</b>
+            <!-- </#if>  -->
+            </p>
+        </td>
+        <td align="right" class="td_top_line ">
+         <#if amounttotalsum?has_content>
+            <p class="alignR"><b>${grossamttotalsum?string('##,#00.00')}</b></p>
+           </#if> 
+        </td>
+    </tr>
+    <tr>
+        <td class="td_top_line " colspan="10">
+            <p class="alignL"><b>Amount in Words&nbsp;:&nbsp;${record.currencysymbol}&nbsp;${record.custbody_total_amount_in_words}</b></p>
+        </td>
+    </tr>
+</table>
+</#if>
+<#if record.expense?has_content>
+    <#assign TotalAmount = 0/>
+    <!-- <#assign itemExpTaxTotal = 0/> -->
+    <#assign TotalGrossAmount = 0/>
+    <!-- <#assign ttga = 0/> -->
+     <#assign amounttax=0/>
+    <#assign totaltax=0/>
+<table class="itemtable" style="width: 100%;margin-top:10px;">
+    <tr>
+        <td align="left" class=""><b>Expense</b></td>
+    </tr>
+</table>
+<table class="itemtable" style="width: 100%;"><!-- start items -->
+    <#list record.expense as expense>
+    <#if expense_index==0>
+
+    <thead>
+    <tr>
+        <th align="left" style="width:5%" class="td_left_line td_top_line td_bottom_line">Sl#</th>
+        <th align="left" style="width:25%"  class="td_left_line td_top_line td_bottom_line"><p align="left">Memo</p></th>
+        <th align="right"  style="width:15%" class="td_top_line td_left_line td_bottom_line"><p align="right">Amount</p></th>
+        <th align="right" style="width:15%" class="td_top_line td_left_line td_bottom_line">Tax Code</th>
+        <th align="right" style="width:15%" class="td_top_line td_left_line td_bottom_line">Tax Rate</th>
+        <th align="right" style="width:15%" class="td_top_line td_left_line td_bottom_line"><p align="right">Tax Amount</p></th>
+        <th align="right" style="width:15%" class="td_right_line td_top_line td_bottom_line td_left_line"><p align="right">Gross Amount</p></th>
+    </tr>
+    </thead>
+</#if>
+    <tr>
+        <td align="center"  class="td_left_line td_bottom_line">${expense_index + 1}</td>
+        <td align="left"   class="td_left_line td_bottom_line">${expense.memo}</td>
+        <td align="right"  class="td_left_line td_bottom_line">${expense.amount?string('##,#00.00')}</td>
+        <td align="right"  class="td_left_line td_bottom_line">${expense.taxcode}</td>
+        <td align="right"  class="td_left_line td_bottom_line">${expense.taxrate1}</td>
+        <!-- <td align="right"  class="td_left_line td_bottom_line">00.00</td> -->
+        <#if expense.tax1amt?has_content>
+        <td align="right"  class="td_left_line td_bottom_line">
+            ${expense.tax1amt?string('##,##0.00')}
+            </td>
+            </#if>
+        <td class="td_left_line td_right_line td_bottom_line" align="right">
+        <#if expense.grossamt?has_content>
+        <p>${expense.grossamt?string('##,#00.00')}</p>
+        </#if>
+        </td>
+    </tr>
+    <#assign TotalAmount = TotalAmount + expense.amount/>
+    <#assign TotalGrossAmount = TotalGrossAmount + expense.grossamt />
+    <#assign totaltax=totaltax+expense.tax1amt>
+    </#list>
+    <tr>
+        <td align="right" colspan="2" class="td_left_line td_bottom_line"><b>Total</b></td>
+        <td align="right" class=" td_right_line td_left_line td_bottom_line ">
+            <p ><b>${TotalAmount?string["##,##0.00"]}</b></p>
+        </td>
+        <td align="right" class=" td_right_line td_bottom_line "></td>
+        <td align="right" class=" td_right_line td_bottom_line"></td>
+         <td align="right" class=" td_bottom_line">
+          <#if totaltax?has_content>
+         <b>${totaltax?string('##,#00.00')}</b>
+         </#if>
+         </td>
+         <!-- <#if TotalGrossAmount?has_content> -->
+        <td  align="right"  class="td_left_line td_right_line td_bottom_line">
+        <#if TotalGrossAmount?has_content>
+        <b >${TotalGrossAmount?string('##,#00.00')}</b>
+         </#if>
+         </td>
+        <!-- </#if> -->
+    </tr>
+    </table>
+</#if>
+
+<!-- <#if record.expense?has_content>
+    <#assign TotalAmount = 0/>
+    <#assign itemExpTaxTotal = 0/>
+    <#assign TotalGrossAmount = 0/>
+<table class="itemtable" style="width: 100%;margin-top:10px;">
+    <tr>
+        <td align="left" class=""><b>Expense</b></td>
+    </tr>
+</table>
+<table class="itemtable" style="width: 100%;"><!- start items ->
+    <#list record.expense as expense>
+    <#if expense_index==0>
+
+    <thead>
+    <tr>
+        <th align="left" style="width:5%" class="td_left_line td_top_line td_bottom_line">Sl#</th>
+        <th align="left" style="width:25%"  class="td_left_line td_top_line td_bottom_line"><p align="left">Memo</p></th>
+        <th align="right"  style="width:15%" class="td_top_line td_left_line td_bottom_line"><p align="right">Amount</p></th>
+        <th align="right" style="width:15%" class="td_top_line td_left_line td_bottom_line">Tax Code</th>
+        <th align="right" style="width:15%" class="td_top_line td_left_line td_bottom_line">Tax Rate</th>
+        <th align="right" style="width:15%" class="td_top_line td_left_line td_bottom_line"><p align="right">Tax Amount</p></th>
+        <th align="right" style="width:15%" class="td_right_line td_top_line td_bottom_line td_left_line"><p align="right">Gross Amount</p></th>
+    </tr>
+    </thead>
+</#if>
+
+    <tr>
+        <td align="center"  class="td_left_line td_bottom_line">${expense_index + 1}</td>
+        <td align="left"   class="td_left_line td_bottom_line">${expense.memo}</td>
+        <td align="right"  class="td_left_line td_bottom_line">${expense.amount?string('##,#00.00')}</td>
+        <td align="right"  class="td_left_line td_bottom_line">${expense.taxcode}</td>
+        <td align="right"  class="td_left_line td_bottom_line">${expense.taxrate1}</td>
+        <!- <#if expense.tax1amt?has_content> ->
+        <td align="right"  class="td_left_line td_bottom_line">${expense.tax1amt?string('##,#00.00')}</td>
+        <!- </#if> ->
+        <#assign Totalgrosstax = expense.tax1amt + expense.amount/>
+        <!- <#if expense.grossamt?has_content> ->
+        <td align="right"  class="td_left_line td_right_line td_bottom_line">${expense.amount?string('##,#00.00')}</td>
+          <!-</#if> ->
+    </tr>
+    <#assign TotalAmount = TotalAmount + expense.amount/>
+    <#assign TotalGrossAmount = TotalGrossAmount + expense.grossamt />
+    <#assign itemExpTaxTotal=itemExpTaxTotal+expense.tax1amt/>
+    </#list>
+    <tr>
+        <td align="right" colspan="2" class="td_left_line td_bottom_line"><b>Total</b></td>
+        <td align="right" class="td_top_line td_right_line td_left_line td_bottom_line ">
+              <!- <#if TotalAmount?has_content> ->
+            <p class="alignR"><b>${TotalAmount?string('##,#00.00')}</b></p>
+            <!- </#if> ->
+        </td>
+        <td align="right" class="td_top_line td_right_line td_bottom_line "></td>
+        <td align="right" class="td_top_line td_right_line td_bottom_line"></td>
+         <td align="right" class="td_top_line td_right_line td_bottom_line">
+                <!- <#if itemExpTaxTotal?has_content> ->
+                <b>${itemExpTaxTotal}</b>
+                <!- </#if> ->
+                </td>
+        <td align="right" colspan="1" class="td_left_line td_right_line td_bottom_line">
+        <!- <#if TotalGrossAmount?has_content> ->
+        <b>${TotalGrossAmount}</b>
+         <!- </#if> ->
+        </td>
+    </tr>
+    </table>
+</#if> -->
+
+
+<!-- <table style="width:100%;margin-top:10px;">
+    <tr>
+        <td align="left" style="width:21%;"><b>Terms and Conditions </b></td>
+        <td align="left" style="width:2%;">:</td>
+        <td align="left" style="width:73%;">${record.custbody_terms_conditions}</td>
+    </tr>
+</table> -->
+
+  
+
+<table style="width:100%;">
+    <tr>
+        <td align="center">&nbsp;</td>
+    </tr>
+    <tr style="width:100%;padding-top: 20px;">
+        <td align="left" style="width:40%;">
+            <table>
+            <#if record.custbody_created_by?has_content>
+             <tr>
+                    <td align="center">${record.custbody_created_by}</td>
+                </tr>
+                
+                <#else>
+                <tr>
+                    <td>___________________</td>
+                </tr>
+               </#if>
+               <tr>
+                    <td align="center">
+                        <b>Created By</b>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td align="right">
+            <table align="right">
+                <tr>
+                    <td>___________________</td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <b>Approved By</b>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+</body>
+</pdf>

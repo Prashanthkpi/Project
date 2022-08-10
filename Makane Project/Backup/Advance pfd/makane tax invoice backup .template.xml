@@ -1,0 +1,546 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+<#if .locale == "zh_CN">
+<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+<#elseif .locale == "zh_TW">
+<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+<#elseif .locale == "ja_JP">
+<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+<#elseif .locale == "ko_KR">
+<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+<#elseif .locale == "th_TH">
+<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+</#if>
+<macrolist>
+<macro id="nlheader">
+
+ <macro id="nlheader">
+
+       <table class="header" style="width: 100%;height:90px;">
+            <tr >
+                <td style="width:100%;">
+                <#if subsidiary.logo@url?has_content>
+                     <img src="${subsidiary.logo@url}" style="align:right;height:150px;width:200px;top:-10px;padding-top:-10px;padding-bottom:25px;"/> <!--style="height:150px;position:absolute;top:-10px;padding-top:-10px;padding-bottom:20px;margin-left:1000px;" /> -->
+               	
+                <#else>
+                    <img src="${companyInformation.logoUrl}" style="align:right;height:150px;width:200px;top:-10px;padding-top:-10px;padding-bottom:25px;"/><!--  style="height:150px;position:absolute;top:-10px;padding-top:-10px;padding-bottom:20px;margin-left:1000px; " /> -->
+                </#if>
+                
+                   
+                </td> 
+	        </tr>
+        </table>
+        </macro>
+ 
+</macro>
+<#if (record.status == "Pending Approval") >
+<macro id="watermark">
+    <div rotate="-45" style="margin-top:400px;margin-left:50px;margin-right:50px;z-index:999;" font-size="20pt" color="#C0C0C0">
+        <p>PENDING FOR APPROVAL</p>
+    </div>
+</macro>
+</#if>
+
+<macro id="nlfooter">
+    <table style="width: 100%;">
+        <tr>
+            <td align="left" style="width:60%;">
+                <p class="alignL" style="font-size:11px;font-style:italics;color:#A9A9A9">*This is a system-generated document. No signature is required.</p>
+            </td>
+            <td style="margin-left:150px;">&nbsp;( Page <pagenumber/>of <totalpages/>)&nbsp;</td>
+        </tr>
+    </table>
+                        </macro>
+                    </macrolist>
+                    <style type="text/css">span, table {
+                        <#if .locale=="zh_CN">font-family: stsong, sans-serif;
+                            <#elseif .locale=="zh_TW">font-family: msung, sans-serif;
+                                <#elseif .locale=="ja_JP">font-family: heiseimin, sans-serif;
+                                    <#elseif .locale=="ko_KR">font-family: hygothic, sans-serif;
+                                        <#elseif .locale=="ru_RU">font-family: verdana;
+                                            <#else>font-family: sans-serif;
+                                            </#if>font-size: 9pt;
+		table-layout: fixed;
+		}
+		th {
+		font-weight: bold;
+		font-size: 8.5pt;
+		padding-top: 2px;
+		vertical-align: middle;
+		<!-- /*padding: 0px 0px 0px;*/ -->
+		/*background-color: #e3e3e3;
+		color: #333333;*/
+		}
+		b {
+		font-weight: bold;
+		color: #333333;
+		}
+		table.header td {
+		padding: 0;
+		font-size: 10pt;
+		}
+		table.footer td {
+		padding: 0;
+		font-size: 8pt;
+		}
+		#itemtable th p{
+		vertical-align: text-top !important;
+		text-align: center !important;
+		}
+		#itemtable{
+		font-size: 8.5pt !important;
+		border: 0.5px solid #000000
+		}
+		table.total {
+		page-break-inside: avoid;
+		}
+		tr.totalrow {
+		background-color: #e3e3e3;
+		line-height: 200%;
+		}
+		td.totalboxtop {
+		font-size: 12pt;
+		background-color: #e3e3e3;
+		}
+		span.title {
+		font-size: 28pt;
+		}
+		.smallTitle {
+		font-size: 9pt;
+		}
+		span.number {
+		font-size: 16pt;
+		text-align:center;
+		}
+		span.itemname {
+		font-weight: bold;
+		line-height: 150%;
+		}
+		hr {
+		width: 100%;
+		color: #d3d3d3;
+		background-color: #d3d3d3;
+		height: 1px;
+		}
+		table.smalltext tr td {
+		font-size: 8pt;
+		}
+		/*table.itemtable th{
+		border-bottom: 10px #ffc966;
+		border-color: yellow;
+		}*/
+		p.alignR {
+		text-align: right !important;
+		}
+		<!-- p.alignL {
+		text-align: left !important;
+		} -->
+		p.alignC {
+		text-align: center !important;
+		}
+		.td_right_line{
+		/*border-right: 0.5px solid #f4f4f4;*/
+		border-right :0.5px solid #000000;
+		}
+		.td_bottom_line{
+		border-bottom: 0.5px solid #000000;
+		}
+		.td_top_line{
+		/*border-top :0.5px solid #f4f4f4;*/
+		border-top :0.5px solid #000000;
+		}
+		.title{
+		font-weight: bold;
+		align:center!important;
+		font-size:16pt;
+		}
+		.footer-img{
+		/*width: 100%;
+		height: 20%;*/
+		top: 0px;
+		right: 0px;
+		left: 0px;
+		bottom: 0px;
+		}
+		.footer{
+		margin-left:-45px; margin-right:-60px; margin-bottom:-115px;
+		}
+		.td_left_line{
+		/*border-right: 0.5px solid #f4f4f4;*/
+		border-left :0.5px solid #000000;
+		}
+		.maintbl{
+		border:0.5px solid #000000;
+		}
+		.footertbl{
+		border:0.5px solid #000000;
+		border-top: 0px !important;
+		}
+		.footertbl2{
+		
+		/*border:0.5px solid #000000;*/
+		border-left: 0.5px solid #000000;
+		border-right: 0.5px solid #000000;
+		border-top: 0.25px !important;
+		}
+		.pad_left{
+		padding-left: 5px!important;
+		}
+		th,td{
+		padding:4px;
+		}
+		                                                                                                                                                                                                                            <!--  .td_top_line td{
+		padding-left: 5px!important;
+		} -->
+		td img {
+		max-width:100%;
+		
+		}
+                               </style>
+                                    </head>
+                                    <body header="nlheader" background-macro="watermark" header-height="10%" footer="nlfooter" footer-height="4%" padding="0.25in 0.5in 0.25in 0.5in" size="A4">
+                                      
+<table style="width:100%">
+            <tr><td align="center" class="title">
+                                                    <u>TAX INVOICE</u>
+                                                </td></tr>
+    </table>
+                                         
+   <table style="width: 100%;border:0.5px Solid black;margin-top:5px;">
+    <tr>
+        <td class="">
+            <table style="width:100%" id="head">
+                <tr>
+                    <td width="48%"><p align="left"><b>Customer</b></p></td>
+                    <td width="3%"><b>:</b></td>
+                     <#if record.entity.isperson?string == "Yes">
+                    <td><b>${record.entity.firstname}&nbsp;${record.entity.lastname}</b></td>
+                    <#else>
+                    <td width="49%"><p align="left"><b>${record.entity.companyname}</b></p></td>
+                     </#if>
+                </tr>
+                <tr>
+                    <td><p align="left"><b>Address</b></p></td>
+                    <td ><b>:</b></td>
+                    <td><p align="left">${record.entity.address}</p></td>
+                </tr>
+                <tr>
+                    <td><p align="left"><b>Tel No</b></p></td>
+                    <td ><b>:</b></td>
+                    <td><p align="left">${record.entity.phone?keep_after("+")}</p></td>
+                </tr>
+                <tr>
+                    <td><p align="left"><b>Email</b></p></td>
+                    <td ><b>:</b></td>
+                    <td><p align="left">${record.entity.email}</p></td>
+                </tr>
+                <tr>
+                    <td><p align="left"><b>Customer Tax Registration No</b></p></td>
+                    <td ><b>:</b></td>
+                    <td><p align="left">${record.entity.vatregnumber}</p></td>
+                </tr>
+                <tr>
+                    <td><p align="left"><b>Sales Order#</b></p></td>
+                    <td ><b>:</b></td>
+                    <td><p align="left">${record.otherrefnum}</p></td>
+                </tr>
+            </table>
+        </td>
+        <td class="" style="border-left:0.5px Solid Black;">
+             <table style="width:100%">
+                <tr>
+                    <td width="48%"><b>Invoice#</b></td>
+                    <td width="3%"><b>:</b></td>
+                    <td width="49%">${record.tranid}</td>
+                </tr>
+                <tr>
+                    <td><b>Invoice Date</b></td>
+                    <td><b>:</b></td>
+                    <td>${record.trandate?string("dd-MMM-YYYY")}</td>
+                </tr>
+                <tr>
+                    <td><b>Currency</b></td>
+                    <td><b>:</b></td>
+                    <td> ${record.currency}</td>
+                </tr>
+                <tr>
+                    <td><b>Exchange Rate</b></td>
+                    <td><b>:</b></td>
+                    <td> <#if record.exchangerate?has_content>${record.exchangerate?string["#,##0.00"]}</#if></td>
+                </tr>
+                 <tr>
+                    <td><b>Due Date</b></td>
+                    <td><b>:</b></td>
+                    <#if record.duedate?has_content>
+                    <td>${record.duedate?string("dd-MMM-YYYY")}</td>
+                     <#else>
+                    <td></td>
+                     </#if>
+                </tr>
+    <#if subsidiary.federalidnumber?has_content>
+                <tr>
+                    <td><b>Tax Registration No</b></td>
+                    <td><b>:</b></td>
+                    <td>${subsidiary.federalidnumber}</td>
+                </tr>
+    </#if>
+                <tr>
+                    <td><b>Terms of Payment</b></td>
+                    <td><b>:</b></td>
+                    <td>${record.terms}</td>
+                </tr>
+                <!-- <tr>
+                    <td><b>Date of Supply</b></td>
+                    <td><b>:</b></td>
+                    <td>${record.trandate}</td>
+                </tr>
+               -->
+                <!-- <tr>
+                    <td><b>Delivery Type</b></td>
+                    <td><b>:</b></td>
+                    <td></td>
+                </tr> -->
+            </table>
+        </td>
+    </tr>
+</table>
+
+<#if record.item?has_content>
+<#assign SrNo=0>
+    <table class="footertbl2" id="itemtable" style="width: 100%;margin-top:10px;" width="100%">                                                <!-- start items -->
+    <#list record.item as item>
+        <#if item_index==0><#assign grosstotalsum = 0>
+        <#assign amounttotalsum = 0><#assign taxamttotalsum = 0>
+        <thead>
+            <tr style="padding-bottom: 0px;">
+                <th align="center" width="4%" class="td_right_line">
+                    <p align="left"><b>Sl#</b></p>
+                </th>
+                <th align="center" class="td_right_line" width="18%">
+                    <p class="alignL" style="padding-right:16px">Item Description</p>
+                </th>
+                <th align="center" class="td_right_line" width="6%">
+                    <p style="padding-right:8px">Qty</p>
+                </th>
+                <th align="center" class="td_right_line" width="10%">
+                    <p  style="padding-right:32px">Unit</p>
+                </th>
+                 <th align="center" class="td_right_line" width="10%">
+                    <p  style="padding-right:23px">Start Date</p>
+                </th>
+                 <th align="center" class="td_right_line" width="10%">
+                    <p  style="padding-right:25px">End Date</p>
+                </th>
+                <th align="center" class="td_right_line" width="10%">
+                    <p class="alignR" style="margin-left:6px">Unit Rate</p>
+                </th>
+                <th align="center" class="td_right_line" width="10%">
+                    <p class="alignR"  style="margin-left:6px">Amount</p>
+                </th>
+                 <th align="center" class="td_right_line" width="10%">
+                    <p class="alignR"  style="margin-left:15px">Tax code</p>
+                </th>
+                <th align="center" class="td_right_line" width="8%">
+                    <p class="alignR"  style="margin-left:17px">Tax Rate</p>
+                </th>
+                <th align="center" class="td_right_line" width="10%">
+                    <p class="alignR"  style="margin-left:5px">Tax Amount</p>
+                </th>
+                <th align="center" width="11%">
+                    <p class="alignR"  style="margin-left:10px">Gross Amount</p>
+                </th>
+            </tr>
+        </thead>
+</#if>
+                                     
+        <tr>
+            <td align="center" class="td_top_line td_right_line">
+                <p align="center"><#assign SrNo=SrNo + 1/>${SrNo}</p></td>
+            <td align="left" class="td_top_line td_right_line">
+                <p class="alignL">${item.item}<br/>${item.description}</p>
+            </td>
+            <td align="center" class="td_top_line td_right_line">
+                <p class="alignC">${item.quantity}</p>
+            </td>
+            <td align="center" class="td_top_line td_right_line">
+                <p class="alignC">${item.units}</p>
+            </td>
+            <td align="right" class="td_top_line td_right_line"><p>${item.custcol_contract_start_date}</p></td>
+             <td align="right" class="td_top_line td_right_line"><p>${item.custcol_contract_end_date}</p></td>
+            <td align="right" class="td_top_line td_right_line">
+                <p class="alignR">${item.rate?string["##0.00"]}</p>
+            </td>
+             <#if item.amount?has_content>
+            <td align="right" class="td_top_line td_right_line">
+                <p class="alignR">${item.amount?string('##,#00.00')}</p>
+            </td>
+            </#if>
+             <td align="center" class="td_top_line td_right_line">
+                <p class="alignC">${item.taxcode}</p>
+            </td>
+            <td align="center" class="td_top_line td_right_line">
+                <p class="alignC" style="padding-left:20px">${item.taxrate1}</p>
+            </td>
+             <#if item.tax1amt?has_content>
+            <td align="right" class="td_top_line td_right_line">
+                <p class="alignR">${item.tax1amt?string('##,#00.00')}</p>
+            </td>
+            </#if>
+            <td align="right" class="td_top_line ">
+                <p class="alignR">
+    <#assign grosstotalsum=grosstotalsum + item.grossamt/>${item.grossamt?keep_after("$")}</p>
+    <#assign amounttotalsum=amounttotalsum + item.amount/>
+    <#assign taxamttotalsum=taxamttotalsum + item.tax1amt/>
+            </td>
+        </tr>
+</#list>
+    <tr>
+        <td align="right" colspan="7" class="td_right_line  td_top_line" style="font-weight: bold;">TOTAL</td>
+        <td align="right" class="td_top_line td_right_line ">
+            <p class="alignR"><b>${amounttotalsum?string('##,#00.00')}</b></p>
+        </td>
+        <td align="right" class="td_top_line td_right_line ">
+        </td>
+         <td align="right" class="td_top_line td_right_line ">
+        </td>
+         <#if record.taxtotal?has_content>
+        <td align="right" class="td_top_line td_right_line ">
+            <p class="alignR"><b>${record.taxtotal?string('##,#00.00')}</b></p>
+        </td>
+        </#if>
+       <#if record.total?has_content>
+        <td align="right" class=" td_top_line td_right_line ">
+            <p class="alignR"><b>${record.total?string('##,#00.00')}</b></p>
+        </td>
+        </#if>
+    </tr>
+    <tr>
+        <td class="td_top_line td_right_line " colspan="12">
+            <p class="alignL"><b>Amount in Words&nbsp;:&nbsp;${record.currencysymbol}&nbsp;${record.custbody_total_amount_in_words}</b></p>
+        </td>
+    </tr>
+</table>
+</#if>
+
+<table class="footertbl2" id="itemtable" style="width: 100%;margin-top:10px;" width="100%">
+    <tr>
+        <td align="left" class="td_right_line" style="width: 90%;">
+            <p class="alignL"><b>Net Amount</b></p>
+        </td>
+         <td align="right" class="" style="width: 10%;">
+         <#if amounttotalsum?has_content>
+             <p class="alignR"><b>${amounttotalsum?string('##,#00.00')}</b></p>
+             </#if>
+        </td>
+    </tr>
+    <tr>
+        <td align="left" class="td_top_line td_right_line" style="width: 90%;">
+              <p class="alignL"><b>Tax Amount</b></p>
+        </td>
+         <td align="right" class="td_top_line" style="width: 10%;">
+         <!-- <#if record.taxtotal?has_content> -->
+             <p class="alignR"><b>${record.taxtotal?string('##,#00.00')}</b></p>
+             <!-- </#if> -->
+        </td>
+    </tr>
+    <tr>
+        <td align="left" class="td_top_line td_right_line" style="width: 90%;">
+              <p class="alignL"><b>Gross Amount</b></p>
+        </td>
+         <td align="right" class="td_top_line" style="width: 10%;">
+         <#if record.total?has_content>
+             <p class="alignR"><b>${record.total?string('##,#00.00')}</b></p>
+             </#if>
+        </td>
+    </tr>
+</table>
+
+                                                                      
+
+<table style="width: 100%;margin-top:15px;">
+      <tr>
+        <th align="left" colspan="2" style="font-size:9pt;"><b>Please remit to:</b></th>
+    </tr>
+    <tr>
+        <td align="left" colspan="2">
+            Bank Name &nbsp;:&nbsp;${record.custbody_bank_account.custrecord_acc_bankname}<br></br>
+            Country &nbsp;:&nbsp;${record.custbody_bank_account.custrecord_acc_bankaddress}<br></br>
+            Account Number &nbsp;:&nbsp;${record.custbody_bank_account.custrecord_ac_number}<br></br>
+            IBAN &nbsp;:&nbsp;${record.custbody_bank_account.custrecord_acc_iban}<br></br>
+        </td>
+    </tr>
+</table>
+
+  <!-- <table style="width: 100%;margin-top:15px;">
+                                                                             <tr>
+                                                                                 <td><b>For ${record.subsidiary}  </b></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                                
+
+                                                                </tr>
+                                                                        </table> -->
+<!-- <table style="width: 100%;margin-top:40px;">
+    <tr>
+        <td align="left" width="25%">_____________________</td>
+        <td align="left" width="50%"></td>
+        <td  width="25%" align="center" style="margin-right:10px;">_____________________
+            </td>
+    </tr>
+     <tr>
+        <td align="left" width="20%"></td>
+        <td align="left" width="60%"></td>
+        <td align="center" style="margin-right:10px;">
+            <p style="margin-right:10px;padding-left:13px;font-weight:bold"><b>Received By</b></p></td>
+    </tr>
+      <tr>
+        <td align="left" width="20%"><b>Prepared by</b></td>
+        <td align="left" width="60%"></td>
+        <td align="center" style="margin-right:10px;">
+            <p style="margin-right:10px;padding-left:13px;font-weight:bold"></p></td>
+    </tr>
+</table> -->
+ <table style="width:100%;">
+ <tr style="width:100%;padding-top: 50px;">
+
+ <td align="left" style="width:40%;">
+  <table>
+  
+                                                                                                   <tr>
+                                                                                                        <td align="center" >${record.custbody_nalg_created_by}
+                                                                                                          <#if record.custbody_nalg_created_by.title?has_content>${record.custbody_nalg_created_by.title}
+                                                                                                         <#else>   
+                                                                                                            &nbsp;
+                                                                                                        </#if>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                     <tr>
+                                                                                                        <td align="center" style="margin-top:-13px;">____________</td>
+                                                                                                    </tr>
+
+                                                                                                    <tr>
+                                                                                                        <td align="center">
+                                                                                                            <b>Created By</b>
+                                                                                                        </td>
+                                                                                                    </tr>
+                                                                                                </table>
+                                                                                            </td>
+                                                                                             <td align="right">
+                                                                                <table align="right">
+                                                                                    <tr>
+                                                                                        <td>___________________</td>
+                                                                                    </tr>
+
+                                                                                    <tr>
+                                                                                        <td align="center">
+                                                                                            <b>Received By</b>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                                </td>
+                                                                                 </tr>
+                                                                    </table>
+</body>
+</pdf>

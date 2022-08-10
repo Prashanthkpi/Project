@@ -1,0 +1,601 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+    <#global Cash = '1'/>
+    <#global Cheque = '2' />
+    <#global letterOfCredit = '3' />
+    <#global onlineTransfer = '4' />
+    <#global TT = '5' />
+    <#global BT = '6' />
+    <#global CCPay = '7' />
+    <#global DCPay = '8' />
+
+    <#global paymentTypeBank = '1' />
+    <#global paymentTypeCash = '2' />
+    <head>
+     <link name="Amiri-font" type="font" subtype="opentype" src="https://7329918.app.netsuite.com/core/media/media.nl?id=12252&amp;c=7329918&amp;h=0UHuNYXd9YR04EmKuSz3PVitE9A7emTU7pB82YEH2SWBNuPR&amp;_xt=.ttf" src-bold="https://7329918.app.netsuite.com/core/media/media.nl?id=12250&amp;c=7329918&amp;h=V_5JR_3nl_jzVCjiM314tG8nCKoOAj_QKzurLf3UQkAA4QOd&amp;_xt=.ttf" bytes="2" />
+        <link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+        <link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+        <#if .locale == "zh_CN">
+            <link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+            <#elseif .locale == "zh_TW"/>
+                <link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+                <#elseif .locale == "ja_JP"/>
+                    <link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+                    <#elseif .locale == "ko_KR"/>
+                        <link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+                        <#elseif .locale == "th_TH" />
+                            <link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+                        </#if>
+                        <macrolist>
+                         <macro id="nlheader">
+                                <table class="header" style="width: 100%;">
+                                    <tr>
+                                        <#if record.subsidiary.internalid?string == '5'>
+                                            <td align="center" valign="top" width="33%">
+                                                <img src="${subsidiary.logo@url}" style="width:155px;height:50px;position:absolute;top:30px;left:35%;" />
+                                            </td>
+
+                                        </#if>
+                                        <#if record.subsidiary.internalid?string == '4'>
+                                            <td align="center" valign="top" width="33%">
+                                                <img src="${subsidiary.logo@url}" style="width:155px;height:50px;position:absolute;top:30px;left:35%;" />
+                                            </td>
+
+                                        </#if>
+                                        <#if record.subsidiary.internalid?string == '3'>
+                                            <td align="center" valign="top" width="33%">
+                                                <img src="${subsidiary.logo@url}" style="width:160px;height:50px;position:absolute;top:25px;left:37%;" />
+                                            </td>
+
+                                        </#if>
+                                        <#if record.subsidiary.internalid?string == '1'>
+                                            <td align="center" valign="top" width="33%">
+                                                <img src="${subsidiary.logo@url}" style="width:155px;height:50px;position:absolute;top:30px;left:35%;" />
+                                            </td>
+
+                                        </#if>
+                                         </tr>
+                                </table>
+                            </macro>
+                            <macro id="nlfooter">
+                                <!-- <table style="width: 100%">
+                                    <tr>
+                                        <td align="right" colspan="3">&nbsp;( Page <pagenumber/>
+ of <totalpages/>
+ )&nbsp;</td>
+                                </tr>
+                            </table> -->
+                         <table style="width: 100%;">
+                                 <tr>
+                                        <#if record.subsidiary.mainaddress_text?has_content>
+                                        <td align="left" style="width:50%;font-size:9px">${subsidiary.mainaddress_text}</td>
+                                         </#if>
+                                        <#if record.subsidiary.custrecord_arabic_address?has_content>
+                                     	<td style="width:50%;" align="right">
+                                        <p class="fontA" align="right">${record.subsidiary.custrecord_arabic_address}<br/></p>
+                                         </td>
+                                  	</#if>
+                                </tr>
+                        </table>
+
+                          </macro>
+                        </macrolist>
+                    <style type="text/css">span, table {
+                        <#if .locale=="zh_CN">font-family: stsong, sans-serif;
+                            <#elseif .locale=="zh_TW"/>font-family: msung, sans-serif;
+                                <#elseif .locale=="ja_JP"/>font-family: heiseimin, sans-serif;
+                                    <#elseif .locale=="ko_KR">font-family: hygothic, sans-serif;
+                                        <#elseif .locale=="ru_RU">font-family: verdana;
+                                            <#else/>font-family: sans-serif;
+                                            </#if>font-size: 9pt;table-layout: fixed;
+        }
+        th {
+        font-weight: bold;
+        font-size: 8.5pt;
+        padding-top: 2px;
+        vertical-align: middle;
+        }
+        b {
+        font-weight: bold;
+        color: #333333;
+        }
+        table.header td {
+        padding: 0;
+        font-size: 10pt;
+        }
+        table.footer td {
+        padding: 0;
+        font-size: 8pt;
+        }
+        #itemtable th p{
+        vertical-align: text-top !important;
+        text-align: center !important;
+        }
+        #itemtable{
+        font-size: 8.5pt !important;
+        border: 0.5px solid #000000
+        }
+        table.total {
+        page-break-inside: avoid;
+        }
+        tr.totalrow {
+        background-color: #e3e3e3;
+        line-height: 200%;
+        }
+        td.totalboxtop {
+        font-size: 12pt;
+        background-color: #e3e3e3;
+        }
+        span.title {
+        font-size: 28pt;
+        }
+        .smallTitle {
+        font-size: 9pt;
+        }
+        span.number {
+        font-size: 16pt;
+        text-align:center;
+        }
+        span.itemname {
+        font-weight: bold;
+        line-height: 150%;
+        }
+        hr {
+        width: 100%;
+        color: #d3d3d3;
+        background-color: #d3d3d3;
+        height: 1px;
+        }
+        table.smalltext tr td {
+        font-size: 8pt;
+        }
+        p.alignR {
+        text-align: right !important;
+        }
+        p.alignL {
+        text-align: left !important;
+        }
+        p.alignC {
+        text-align: center !important;
+        }
+        .td_right_line{
+        /*border-right: 0.5px solid #f4f4f4;*/
+        border-right :0.5px solid #000000;
+        }
+        .td_bottom_line{
+        border-bottom: 0.5px solid #000000;
+        }
+        .td_top_line{
+        /*border-top :0.5px solid #f4f4f4;*/
+        border-top :0.5px solid #000000;
+        }
+        .title{
+        font-weight: bold;
+        align: center!important;
+        font-size:16pt;
+        line-height: 150%;
+        }
+         .fontA{
+                      font-family: Amiri-font, sans-serif;
+                  font-size:9px;
+                  dir:rtl;
+                    }
+        .footer-img{
+        top: 0px;
+        right: 0px;
+        left: 0px;
+        bottom: 0px;
+        }
+        .footer{
+        margin-left:-45px; margin-right:-60px; margin-bottom:-115px;
+        }
+        .td_left_line{
+        /*border-right: 0.5px solid #f4f4f4;*/
+        border-left :0.5px solid #000000;
+        }
+        .maintbl{
+        border:0.5px solid #000000;
+        }
+        .footertbl{
+        border:0.5px solid #000000;
+        border-top: 0px !important;
+        }
+        .footertbl2{
+        /*border:0.5px solid #000000;*/
+        border-left: 0.5px solid #000000;
+        border-right: 0.5px solid #000000;
+        border-top: 0.25px !important;
+        }
+        .pad_left{
+        padding-left: 5px!important;
+        }
+        th,td{
+        padding:4px;
+        }
+                                    <!--  .td_top_line td{
+        padding-left: 5px!important;
+        } -->
+        td img {
+        max-width:100%;
+        }
+        .labelB{
+            font-weight:bold;
+        }
+    </style>
+                                    </head>
+                                    <body header="nlheader" background-macro="watermark" header-height="10%" footer="nlfooter" footer-height="4%" padding="0.25in 0.5in 0.25in 0.5in" size="A4">
+                                        <table width="100%">
+                                            <tr>
+                                                <td align="center" style="font-size: 8pt;font-weight: bold;">
+                                                    <h1>PAYMENT VOUCHER</h1>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <table border="1" style="font-size:12px;font-family:verdana,geneva,sans-serif;width:100%;">
+                                            <tr>
+                                                <td width="50%" border-right="1">
+                                                    <table align="right" width="100%">
+                                                        <tr>
+                                                            <td colspan="1" align="left" width="25%">
+                                                                <p align="left">
+                                                                    <b>Payment To</b>
+                                                                </p>
+                                                            </td>
+                                                            <td width="1%">
+                                                                    <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                                                                </td>
+
+                                                                     <#if record.entity.isperson?string = "T">
+
+                    <td><b>${record.entity.firstname}&nbsp;${record.entity.lastname}</b></td>
+
+                    <#else />
+
+                    <td style="width:74%"><b>${record.entity}</b></td>
+
+                    </#if>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="left" width="13%">
+                                                                    <p align="left">
+                                                                        <b>Address</b>
+                                                                    </p>
+                                                                </td>
+                                                                <td width="1%">
+                                                                    <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                                                                </td>
+                                                                <td align="left" width="64%"><p align="left">${record.address}</p></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="left" width="13%">
+                                                                    <p align="left">
+                                                                        <b>Amount</b>
+                                                                    </p>
+                                                                </td>
+                                                                <td width="1%">
+                                                                    <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                                                                </td>
+                                                                <td align="left" width="64%">${record.custbody_applied_3_decimal?string["#,##0.000"]}</td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td width="50%">
+
+                                                        <table align="right" width="100%">
+                                                            <tr>
+                                                                <td colspan="1" align="left" width="30%">
+                                                                    <p align="left">
+                                                                        <b>Cheque/TT#</b>
+                                                                    </p>
+                                                                </td>
+                                                                <td width="1%">
+                                                                    <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                                                                </td>
+                                                                <td align="left" width="64%">
+                                                                ${record.tranid}
+                                                                </td>
+                                                                <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="left" width="20%">
+                                                                    <p align="left">
+                                                                        <b>Date</b>
+                                                                    </p>
+                                                                </td>
+                                                                <td width="1%">
+                                                                    <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                                                                </td>
+                                                                <td align="left" width="64%">
+                                                                  <#if record.custbody_bill_date?has_content>
+                                                                    ${record.custbody_bill_date}
+                                                                <#else/>
+                                                                    ${record.trandate}
+                                                                </#if>
+                                                              </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="left" width="20%">
+                                                                    <p align="left">
+                                                                        <b>Currency</b>
+                                                                    </p>
+                                                                </td>
+                                                                <td width="1%">
+                                                                    <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                                                                </td>
+                                                                <td align="left" width="64%">${record.currency}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="left" width="20%">
+                                                                    <p align="left">
+                                                                        <b>Exchange Rate</b>
+                                                                    </p>
+                                                                </td>
+                                                                <td width="1%">
+                                                                    <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                                                                </td>
+                                                                <td align="left" width="64%">
+                                                                    <p align="left" style="text-decoration:none;">
+                                    ${record.exchangerate?string["#,##0.00"]}
+                                                                    </p>
+                                                                </td>
+                                                            </tr>
+                                                             <tr>
+                                                                <td align="left" width="20%">
+                                                                    <p align="left">
+                                                                        <b>Bank Name</b>
+                                                                    </p>
+                                                                </td>
+<td width="1%">
+                                                                    <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                                                                </td>
+                                                                <td align="left" width="64%">
+                                                                    <p align="left" style="text-decoration:none;">
+                                    ${record.custbody_kpib_bank_account}
+                                                                    </p>
+                                                                </td>
+                                                            </tr>
+
+
+                                              <#if record.custbody_kpib_payment_method?has_content>
+<tr>
+<td align="left" width="20%">
+                                                                <p align="left">
+                                                                    <b>Payment Mode</b>
+                                                                </p>
+                                                            </td>
+                                                            <td width="1%">
+                                                                <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                                                            </td>
+                                                            <td align="left" width="64%">
+                               ${record.custbody_kpib_payment_method}
+                                                            </td>
+                                                        </tr>
+
+                                                        <#if record.custbody_kpib_payment_method.id?string==Cheque>
+<tr>
+<td align="left" width="45%">
+                                                            <p align="left">
+                                                                <b>Bank Name</b>
+                                                            </p>
+                                                        </td>
+                                                        <td width="1%">
+                                                            <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                                                        </td>
+                                                        <td align="left" width="64%">${record.custbody_kpib_bank_account}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="left" width="20%">
+                                                            <p align="left">
+                                                                <b>Cheque No</b>
+                                                            </p>
+                                                        </td>
+                                                        <td width="1%">
+                                                            <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                                                        </td>
+                                                        <td align="left" width="64%">
+                                                            <p align="left" style="text-decoration:none;">
+                                   ${record.custbody_kpib_cheque_number}
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="left" width="20%">
+                                                            <p align="left">
+                                                                <b>Cheque Date</b>
+                                                            </p>
+                                                        </td>
+                                                        <td width="1%">
+                                                            <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                                                        </td>
+                                                        <td align="left" width="64%">
+                                                            <p align="left" style="text-decoration:none;">
+                                    ${record.custbody_kpib_cheque_date}
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+
+                                                    <#else/>
+                                                    <#if record.custbody_kpib_payment_method.id?string!=Cash>
+<tr>
+<td align="left" width="20%">
+                                                        <p align="left">
+                                                            <b>Payment / Transfer Ref No.</b>
+                                                        </p>
+                                                    </td>
+                                                    <td width="1%">
+                                                        <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                                                    </td>
+                                                    <td align="left" width="64%">
+                                                        <p align="left" style="text-decoration:none;">
+                                   ${record.custbody_kpib_online_transfer_number}
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            </#if>
+                                        </#if>
+                                    </#if>
+                                    <tr>
+                                        <td align="left" width="20%">
+                                            <p align="left">
+                                                <b>Memo</b>
+                                            </p>
+                                        </td>
+                                        <td width="1%">
+                                            <b>&nbsp;&nbsp;:&nbsp;&nbsp;</b>
+                                        </td>
+                                        <td align="left" width="64%">
+                                            <p align="left" style="text-decoration:none;">
+                                  ${record.memo}
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+
+
+ <#if record.custpage_ds_print?has_content>
+<table><tr><td><b><br/>Apply</b></td></tr></table>
+<table class="itemtable" style="width: 100%; border:solid 1px #000;">
+                        <#assign SrNo=0 />
+
+                        <#assign customrecord = record.custpage_ds_print?eval />
+<tr>
+<th align="center" width="10%" style="border-bottom:solid 1px #000;border-right:solid 1px #000;">
+                            <p>
+                                <b>Type</b>
+                            </p>
+                        </th>
+                        <th align="center" width="18%" style="border-bottom:solid 1px #000;border-right:solid 1px #000;">
+                            <b>Ref.#.</b>
+                        </th>
+                        <th align="center" width="30%" style="border-bottom:solid 1px #000;border-right:solid 1px #000;">
+                            <p class="center">
+                                <b>Bill Description</b>
+                            </p>
+                        </th>
+                        <th align="center" width="12%" style="border-bottom:solid 1px #000;border-right:solid 1px #000;">
+                            <p class="alignR">
+                                <b>Date</b>
+                            </p>
+                        </th>
+                        <th align="center" width="15%" style="border-bottom:solid 1px #000;border-right:solid 1px #000;">
+                            <p class="alignR">
+                                <b>Bill Amount</b>
+                            </p>
+  </th>
+                        <th align="right" width="15%" style="border-bottom:solid 1px #000;">
+                            <p class="alignR">
+                                <b>Paid Amount</b>
+                            </p>
+                        </th>
+                    </tr>
+                     <#list customrecord as ra>
+
+                        <tr style="border-bottom:solid 1px #000000;">
+                            <td align="center" style="border-right:solid 1px #000;">${ra.values.formulatext_1}</td>
+                            <td align="left" style="border-right:solid 1px #000;"><p align="left">${ra.values.formulatext_2}</p></td>
+                            <td align="left" style="border-right:solid 1px #000;">${ra.values.formulatext}</td>
+                            <td align="center" style="border-right:solid 1px #000;"><p align="left">
+                            <#if ra.values.formuladate?has_content>
+                                ${ra.values.formuladate}
+                            <#else/>
+                                ${ra.values.formuladate_1}
+                            </#if>
+                            </p></td>
+                            <!-- <#if user.email='reena@kpi.co'>
+                                <td align="center" style="border-right:solid 1px #000;"><p align="left">${user.email} ${ra.values.formuladate}</p></td>
+                            <#else/>
+                                <td align="center" style="border-right:solid 1px #000;"><p align="left">${ra.values.custrecord_decimal_date}</p></td>
+                            </#if> -->
+                            <td align="right" style="border-right:solid 1px #000;">${ra.values.custrecord_decimal_amount_due}</td>
+                            <td align="right" style="">${ra.values.custrecord_dec_payment_amt}</td>
+                        </tr>
+
+                </#list>
+
+                <tr>
+                    <td align="right" colspan="5" style="border-right:solid 1px #000;border-bottom:solid 1px #000000;">
+                        <b>TOTAL</b>
+                    </td>
+                    <td  style="border-bottom:solid 1px #000000;"><p align="right">
+                        <b>${record.currencysymbol} &nbsp;${record.custbody_applied_3_decimal?string["#,##0.000"]}</b></p>
+                    </td>
+                </tr>
+
+                   <#if record.currencysymbol?starts_with("OMR") >
+                   <tr>
+                    <td align="left" colspan="4">
+                        <b>Amount in Words &nbsp;:&nbsp;${record.currencysymbol} &nbsp;${record.custbody1}</b>
+                    </td>
+                </tr>
+
+<#else/>
+
+                <tr>
+                    <td align="left" colspan="4">
+                        <b>Amount in Words &nbsp;:&nbsp;${record.currencysymbol} &nbsp;${record.custbody_amount_in_words}</b>
+                    </td>
+                </tr>
+                 <tr>
+                    <td align="right" colspan="6" style="border-top:1px;">
+                        <b>Equivalent &nbsp;:&nbsp;OMR &nbsp;${record.custbody_foreign_currency}</b>
+                    </td>
+                </tr>
+                </#if>
+            </table>
+         </#if>
+
+
+          <table width="100%" style="font-size :12px;margin-top :60px">
+        <tr style="height:5px">
+            <td align="center" width="33%" class="tdalignbottom" valign="bottom" style="margin-bottom:-15px;">${record.custbody_created_by.firstname}&nbsp;<#if record.custbody_created_by.middlename?has_content>${record.custbody_created_by.middlename}&nbsp;</#if>${record.custbody_created_by.lastname}</td>
+            <td align="center" width="33%">&nbsp;</td>
+            <td align="center" width="33%">${record.custbody_approved_by}</td>
+
+        </tr>
+
+        <tr style="height:3px">
+            <td align="center" width="33%" class="tdalign" style="height:3px">____________________</td>
+            <td align="center" width="33%" valign="top" class="tdalign">&nbsp;</td>
+            <td align="center" width="33%" valign="top" class="tdalign">____________________</td>
+            <td align="center" width="33%" valign="top" class="tdalign">&nbsp;</td>
+            </tr>
+
+        <tr style="margin-top 5px">
+            <td align="center" width="33%"><b>Prepared By</b></td>
+            <td align="center" width="33%">&nbsp;</td>
+
+            <td align="center" width="33%"><b>Reviewed By</b></td>
+            <td align="center" width="33%">&nbsp;</td>
+            </tr>
+    </table>
+
+
+      <table width="100%" style="font-size :12px;margin-top :60px">
+        <tr style="height:5px">
+            <td align="center" width="33%" class="tdalignbottom" valign="bottom" style="margin-bottom:-15px;">
+        ${record.custpage_approver_print}<br/>${record.custpage_approved_by_date}
+
+            </td>
+            <td align="center" width="33%">&nbsp;</td>
+            <td align="center" width="33%">${record.custbody_approved_by}</td>
+        </tr>
+        <tr style="height:3px">
+            <td align="center" width="33%" class="tdalign" style="height:3px">____________________</td>
+            <td align="center" width="33%" valign="top" class="tdalign">&nbsp;</td>
+            <td align="center" width="33%" valign="top" class="tdalign">____________________</td>
+            <td align="center" width="33%" valign="top" class="tdalign">&nbsp;</td>
+            </tr>
+        <tr style="margin-top 5px">
+            <td align="center" width="33%"><b>Approved By</b></td>
+            <td align="center" width="33%">&nbsp;</td>
+            <td align="center" width="33%"><b>Received By</b></td>
+            <td align="center" width="33%">&nbsp;</td>
+            </tr>
+    </table>
+    </body>
+</pdf>

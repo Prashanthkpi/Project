@@ -1,0 +1,270 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+    <head>
+        <link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+        <#if .locale == "zh_CN">
+            <link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+            <#elseif .locale == "zh_TW">
+                <link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+                <#elseif .locale == "ja_JP">
+                    <link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+                    <#elseif .locale == "ko_KR">
+                        <link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+                        <#elseif .locale == "th_TH">
+                            <link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+                        </#if>
+                        <macrolist>
+                            <macro id="nlheader">
+                                <table class="header" style="width: 100%;height:70px;">
+                                    <tr >
+                                        <td style="width:100%;">
+                                        <#if subsidiary.logo@url?has_content>
+                                             <img src="${subsidiary.logo@url}" style="align:right;height:100px;width:150px;top:-10px;padding-top:-10px;padding-bottom:25px;"/> <!--style="height:150px;position:absolute;top:-10px;padding-top:-10px;padding-bottom:20px;margin-left:1000px;" /> -->
+                                           
+                                        <#else>
+                                            <img src="${companyInformation.logoUrl}" style="align:right;height:100px;width:150px;top:-10px;padding-top:-10px;padding-bottom:25px;"/><!--  style="height:150px;position:absolute;top:-10px;padding-top:-10px;padding-bottom:20px;margin-left:1000px; " /> -->
+                                        </#if>
+                                        
+                                           
+                                        </td> 
+                                    </tr>
+                                </table>
+                               
+
+                            </macro>
+                            <macro id="footer">
+                                <table class="footer" style="width: 100%;">
+                                    <tr>
+                                        <td align="right">(Page <pagenumber/>
+ of <totalpages/>
+)</td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="margin-top:10px;color:#bab5b5;font-style: italic;">*This is a computer-generated journal entry and does not need a signature.</td>
+                                </tr>
+                            </table>
+                        </macro>
+                    </macrolist>
+                    <style type="text/css">span, table {
+                        <#if .locale=="zh_CN">font-family: stsong, sans-serif;
+                            <#elseif .locale=="zh_TW">font-family: msung, sans-serif;
+                                <#elseif .locale=="ja_JP">font-family: heiseimin, sans-serif;
+                                    <#elseif .locale=="ko_KR">font-family: hygothic, sans-serif;
+                                        <#elseif .locale=="ru_RU">font-family: verdana;
+                                            <#else>font-family: sans-serif;
+                                            </#if>font-size: 9pt;
+                table-layout: fixed;
+            }
+      table {
+        font-size: 9pt;
+        table-layout: fixed;
+      }
+            th {
+                font-weight: bold;
+                vertical-align: middle;
+                padding: 5px 6px 3px;
+                color: #333333;
+            }
+            td {
+                padding: 4px 6px;
+            }
+      td p { align:left }
+            b {
+                font-weight: bold;
+                color: #333333;
+            }
+            table.header td {
+                padding: 0;
+                font-size: 10pt;
+            }
+            table.footer td {
+                padding: 0;
+                font-size: 8pt;
+            }
+            table.itemtable th{
+                padding-bottom: 10px;
+                padding-top: 10px;
+            }
+            .td_left_line{
+             border-left :0.5px solid #000000;
+                 }
+                .td_right_line{
+             border-right :0.5px solid #000000;
+                 }
+                 .td_top_line{
+             border-top :0.5px solid #000000;
+                 }
+                 .td_bottom_line{
+             border-bottom :0.5px solid #000000;
+                 }
+            table.body td {
+                padding-top: 2px;
+            }
+            table.total {
+                page-break-inside: avoid;
+            }
+            tr.totalrow {
+                background-color: #e3e3e3;
+                line-height: 200%;
+            }
+            td.totalboxtop {
+                font-size: 12pt;
+                background-color: #e3e3e3;
+            }
+            td.addressheader {
+                font-size: 8pt;
+                padding-top: 6px;
+                padding-bottom: 2px;
+            }
+            td.address {
+                padding-top: 0;
+            }
+            td.totalboxmid {
+                font-size: 28pt;
+                padding-top: 20px;
+                background-color: #e3e3e3;
+            }
+            span.title {
+                font-size: 28pt;
+            }
+            span.number {
+                font-size: 16pt;
+            }
+            hr {
+                width: 100%;
+                color: #d3d3d3;
+                background-color: #d3d3d3;
+                height: 1px;
+            }
+                                        </style>
+                                    </head>
+                                    <body footer="footer" header="nlheader" footer-height="3%" header-height="8%" padding="0.25in 0.25in 0.25in 0.25in" size="A4">
+                                    
+                                        <h2 align="center" style="font-weight:bold;font-size:18px;font-family:verdana,geneva,sans-serif;">JOURNAL ENTRY</h2>
+
+                                        <table width="100%" border="0.5px solid #000000" style="margin-top:5px">
+                                            <tr>
+                                                <th width="15%" class="td_bottom_line td_right_line">
+Transaction Date
+                                                </th>
+                                                
+                                                <th width="20%" class="td_bottom_line td_right_line">
+Journal Entry No
+                                                </th>
+                                                <th width="18%" class="td_bottom_line td_right_line">
+Currency
+                                                </th>
+                                             
+
+
+                                            </tr>
+                                            <tr>
+               
+                                                <td class="td_right_line" width="20%">
+                                                    <b>
+${record.trandate?string("dd-MMM-YYYY")}
+                                                    </b>
+                                                </td>
+                                                <td width="20%" class="td_right_line">
+                                                    <b>
+${record.tranid}
+                                                    </b>
+                                                </td>
+                                                <td width="20%" class="td_right_line">
+                                                    <b>
+${record.currency}
+                                                    </b>
+                                                </td>
+                                            </tr>
+                                        </table>
+										<#if record.line?has_content>
+<table style="margin-top :10px;" width="100%">
+<#assign item_index=0>
+<tr>
+<th class="td_top_line td_left_line td_bottom_line td_right_line  " align="left" width="20%">Subsidiary</th>
+<th align="left" class="td_top_line td_bottom_line td_right_line " width="20%">Account</th>
+
+<th class="td_top_line td_bottom_line td_right_line " align="left" width="20%">
+    <p class="alignL">Debit </p>
+</th>
+<th class="td_top_line td_bottom_line td_right_line" align="left" width="20%">
+    <p class="alignL">Credit</p>
+</th>
+<th class="td_top_line td_bottom_line td_right_line" align="left" width="20%">
+    <p align="left">Memo</p>
+</th>
+</tr>
+<#assign total_debit = 0 />
+<#assign total_credit = 0 />
+ <#list record.line as item>
+<tr class="td_bottom_line">
+<td align="left" class="td_left_line td_right_line">${record.subsidiary}</td>
+<td align="left" class="td_right_line">${item.account}</td>
+<td align="right" class="td_right_line">${item.debit?string["#,##0.00"]}</td>
+<td align="right" class="td_right_line">${item.credit?string["#,##0.00"]}</td>
+<td align="left" class="td_right_line">${item.memo}</td>
+</tr>
+<#assign total_debit = total_debit + item.debit>
+<#assign total_credit = total_credit + item.credit>
+</#list>
+<tr>
+<td align="center" class="td_left_line td_right_line td_bottom_line"></td>
+<td align="center" class="td_right_line td_bottom_line"></td>
+<td align="right" class="td_right_line td_bottom_line">${total_debit}</td>
+<td align="right" class="td_right_line td_bottom_line">${total_credit}</td>
+<td align="center" class="td_right_line td_bottom_line"></td>
+</tr>
+ </table>
+</#if>
+
+                                                
+
+<table style="width:100%;">
+ <tr style="width:100%;padding-top: 50px;">
+
+
+                                <td align="left">
+                                    <table align="left">
+                                    <tr>
+                                            <td align="center">
+                                            ${record.custpage_approver_print} 
+
+                                          
+
+
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td align="center" style="margin-top:-13px;">___________________</td>
+                                        </tr>
+    
+
+                                        <tr>
+                                            <td align="center">
+                                                <b>Approved By</b>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td align="right" >
+                                    <table align="right">
+                                      <tr>
+                                            <td align="center">${record.custbody_created_by.firstname} &nbsp; ${record.custbody_created_by.lastname}</td>
+                                        </tr>
+                                         <tr>
+                                            <td align="center" style="margin-top:-13px;">___________________</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td align="center">
+                                                <b>Prepared By</b>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+                                </body>
+                            </pdf>
